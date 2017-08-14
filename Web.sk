@@ -1,0 +1,13 @@
+﻿command /web:
+	trigger:
+		send "&9Voici le site Web de MineAndSlash &8: &6&n&lwww.mineandslash.com" to player
+		stop
+command /boutique:
+	aliases: shop
+	trigger:
+		send "&9Voici la boutique en ligne de MineAndSlash &8: &6&n&lwww.shop.mineandslash.com" to player
+		stop
+command /forum:
+	trigger:
+		send "&9Voici le forum de MineAndSlash &8: &6&n&lforum.mineandslash.com" to player
+		stop
