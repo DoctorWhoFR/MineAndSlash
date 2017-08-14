@@ -1,1 +1,86 @@
-Hey!
+Pour utiliser votre base de données, il vous faut un minimum d’expérience là-dedans !
+
+Ce tutoriel sera théorique étant donné que je n’ai pas de base de données que je peux utiliser comme exemple en ce moment.
+
+- Un serveur avec MYSQL SERVER
+- PHPMYADMIN * ( Pas nécessaire si vous connaissez les commandes sous putty )
+- SQLibrariy http://dev.bukkit.org/bukkit-plugins/sqlibrary/
+- Skript
+
+II Étape par étape :
+
+Je ne sais pas si vous avez remarqué, mais vous avez un fichier config.sk dans votre dossier skript
+( plugins/skript/config.sk ) !
+
+Donc première étape vous vous dirigez vers ce dossier et vous l’ouvrez.
+
+Vous descendez, et vous vous arrêtez au premier mot désignant une base de données :
+
+Code:
+
+databases:
+    database 1:
+
+        type: MySQL
+
+        pattern: Sync.* #Ici les variables avec {Sync.+ une information} iront dans votre BDD.
+
+        monitor changes: true
+        monitor interval: 5 seconds #Sauvegarde toutes les 5 secondes dans la base de données
+
+        # == MySQL configuration ==
+        host: localhost
+        port: 3306
+        user: USER #User de la BDD Souvent root
+        password : MDP #Le mot de passe
+        database: Skript #La base de donnée
+
+
+
+  database 2:
+
+        type: CSV
+
+        pattern: faction.* # Ici toutes les variables avec {faction.+ une information} iront dans le .csv.
+
+        file: ./plugins/Skript/variables.csv
+
+        backup interval: 30 minutes
+
+
+	#Exemple : 
+	#set {sync.variable} to nimber of all player online
+	# Cette variable ira dans la BDD !
+	#set {variable} to nimber of all player online
+	#Cette variable n'ira null part 
+	#set {faction.variable} to number of all player online
+	#Cette variable ira dans le csv
+
+   
+               
+version: 2.1.2
+
+Une fois tout cela configuré, vous vous rendrez sur votre phpmyadmin ( votresite.fr/phpmyadmin ).
+Depuis la page d’accueil de phpMyAdmin, un module vous permet de créer une base de données.
+
+Entrez simplement un nom pour cette nouvelle base (EX : « Skript » ou « Sync ») sans accents ni espaces puis cliquez sur le bouton « Créer ».
+Laissez toutes les options comme elles sont proposées par défaut.
+
+Vous installez ensuite SQLibrary dans votre dossier « plugins » et vous redémarrer, normalement vous devriez voir une table apparaître dans la base de données antérieurement créer.
+Maintenant si vos serveurs relier sous bungeecord utilisent cette base de données « Skript », vous pourrez communiquer d’un serveur A une information B vers un serveur C l’information B.
+
+base de données xmap
+
+
+mob: zombie
+
+on death:
+    if attacker is a player:
+        if victim is a {@mob}:
+            add 10 to {xp.%uuid of attacker%}
+			if player has permission "Expx2.sk":
+				set {_calc} to ({xp.%uuid of attacker%}*2)
+				if {xp.%uuid of attacker%} >= 1000:
+					clear {xp.%uuid of attacker%}
+					add 1 to {level.%uuid of attacker%}        
+					set {_calc} to ({level.%uuid of attacker%}*2)
