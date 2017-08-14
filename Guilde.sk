@@ -2,15 +2,15 @@ command /guilde [<text>] [<text>]:
 	trigger:
 		if arg 1 is not set:
 			if {Guilde.%player%} is not set:
-				send "§6Vous n'avez actuellement aucune Guilde, pour créé une guilde: §c/guilde create." to player
+				send "&8[&9Guildes&8] &6&lVous n'avez actuellement aucune Guilde, pour créé une guilde: &3/guilde create." to player
 			else:
-				send "Nom de la Guilde: %{Guilde.%player%}%" to player
+				send "&8[&9Guildes&8] &6&lNom de la Guilde: &5%{Guilde.%player%}%" to player
 		else:
 			if arg 1 is "create":
 				if {Guilde.%player%} is not set:
 					Guilde(player, "create")
 				else:
-					send "Vous devez d'abbord supprimer ou quiter votre Guilde!" to player
+					send "&8[&9Guildes&8]&c&lVous devez d'abbord supprimer ou quiter votre Guilde!" to player
 
 function Guilde(p: player, t: text):
 	if {_t} is "create":
@@ -32,18 +32,18 @@ function Guilde(p: player, t: text):
 	else if {_t} is "nom":
 		close {_p}'s inventory
 		set {Guilde.%{_p}%.creating.set} to "Name"
-		send "§6Veuillez entrez dans le chat le nom de la §cGuilde." to {_p}
+		send "&8[&9Guildes&8] &6&lVeuillez entrez dans le chat le nom de la §cGuilde." to {_p}
 
 	else if {_t} is "aliase":
 		close {_p}'s inventory
 		set {Guilde.%{_p}%.creating.set} to "Aliase"
-		send "§6Veuillez entrez dans le chat l'aliase de la §cGuilde." to {_p}
-		send "§6Merci de ne pas mettre de: &c[]." to {_p}
+		send "&8[&9Guildes&8] &6&lVeuillez entrez dans le chat l'aliase de la §cGuilde." to {_p}
+		send "&8[&9Guildes&8] &6&lMerci de ne pas mettre de: &c[]." to {_p}
 
 	else if {_t} is "description":
 		close {_p}'s inventory
 		set {Guilde.%{_p}%.creating.set} to "Description"
-		send "§6Veuillez entrez dans le chat la description de la §cGuilde." to {_p}	
+		send "&8[&9Guildes&8] &6&lVeuillez entrez dans le chat la description de la §cGuilde." to {_p}	
 
 	else if {_t} is "finish":
 		close {_p}'s inventory
@@ -54,9 +54,9 @@ function Guilde(p: player, t: text):
 		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.Owner} to {_p}
 		set {Guilde.%{_p}%} to {Guilde.%{_p}%.creating.Name}
 		clear {Guilde.%{_p}%.creating.Aliase}, {Guilde.%{_p}%.creating.Description}, {Guilde.%{_p}%.creating.Ouverte} and {Guilde.%{_p}%.creating.Name}
-		send "Création de votre Guilde..." to {_p}
+		send "&8[&9Guildes&8] &2Création de votre Guilde..." to {_p}
 		wait 5 seconds
-		send "Création [OK]!" to {_p}
+		send "&8[&9Guildes&8]&2Création &8[&a&l✔&8] &2&l!" to {_p}
 		make {_p} execute command "/guilde"
 
 
@@ -68,20 +68,20 @@ on chat:
 		if {Guilde.%player%.creating.set} is "Name":
 			set {Guilde.%player%.creating.Name} to message
 			clear {Guilde.%player%.creating.set}
-			send "§6Le nom de votre Guilde est maintenant: §c%{Guilde.%player%.creating.Name}%" to player
+			send "&8[&9Guildes&8] &6&lLe nom de votre Guilde est maintenant: &3%{Guilde.%player%.creating.Name}%" to player
 			Guilde(player, "create")
 
 		if {Guilde.%player%.creating.set} is "Aliase":
 			if message doesn't contain "[" or "]":
 				set {Guilde.%player%.creating.Aliase} to message
 				clear {Guilde.%player%.creating.set}
-				send "§6L'aliase de votre Guilde est maintenant: §c[%{Guilde.%player%.creating.Aliase}%§c]" to player
+				send "&8[&9Guildes&8] &6&lL'aliase de votre Guilde est maintenant: &3[%{Guilde.%player%.creating.Aliase}%&3]" to player
 				Guilde(player, "create")
 			else:
-				send "§6Vous ne devez pas mettre de &c[]." to player
+				send "&8[&9Guildes&8] &6&lVous ne devez pas mettre de &c[]." to player
 
 		if {Guilde.%player%.creating.set} is "Description":
 			set {Guilde.%player%.creating.Description} to message
 			clear {Guilde.%player%.creating.set}
-			send "§6La description de votre Guilde est maintenant: §c%{Guilde.%player%.creating.Description}%" to player
+			send "&8[&9Guildes&8] &6&lLa description de votre Guilde est maintenant: &c%{Guilde.%player%.creating.Description}%" to player
 			Guilde(player, "create")
