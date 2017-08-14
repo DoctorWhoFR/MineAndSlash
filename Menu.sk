@@ -1,9 +1,9 @@
-command /menu:
+ï»¿command /menu:
 	trigger:
 		open virtual chest inventory with size 3 named "&6Menu" to player 
 		format gui slot 0 of player with player's skull named "&6%player%" to do nothing
-		format gui slot 12 of player with ender pearl named "&9Compétences" with lore "&5Compétences: " to do nothing
-		format gui slot 13 of player with eye of ender named "&aAllégences" with lore "&6Allégences:" to do nothing
+		format gui slot 12 of player with ender pearl named "&9CompÃ©tences" with lore "&5CompÃ©tences: " to do nothing
+		format gui slot 13 of player with eye of ender named "&aAllÃ©gences" with lore "&6AllÃ©gences:" to do nothing
 		format gui slot 14 of player with emerald named "&6Level" with lore "&5Level &8> &6 0/100"
 		format gui slot 19 of player with beacon named "&bTP au spawn" to close then run player command "/spawn"
-		format gui slot 25 of player with obsidian named "&3TP aux étages" to close then run player command "/étages"
+		format gui slot 25 of player with obsidian named "&3TP aux Ã©tages" to close then run player command "/Ã©tages"
