@@ -18,12 +18,10 @@ function Guilde(p: player, t: text):
 			set {Guilde.%{_p}%.creating.Name} to "PAS SET"
 			set {Guilde.%{_p}%.creating.Aliase} to "[PAS SET]"
 			set {Guilde.%{_p}%.creating.Description} to "PAS SET"
-			set {Guilde.%{_p}%.creating.Ouverte} to "OUI OU NON"		
 		open virtual chest inventory with size 1 named "§6Guilde Création" to {_p} 
 		format gui slot 0 of {_p} with paper named "§6Nom de votre Guilde" with lore "%{Guilde.%{_p}%.creating.Name}%" to run function Guilde({_p}, "nom")
 		format gui slot 1 of {_p} with paper named "§6Aliase de votre Guilde" with lore "[%{Guilde.%{_p}%.creating.Aliase}%]" to run function Guilde({_p}, "aliase")
 		format gui slot 2 of {_p} with paper named "§6Description de votre Guilde" with lore "%{Guilde.%{_p}%.creating.Description}%" to run function Guilde({_p}, "description")
-		format gui slot 3 of {_p} with paper named "§6Ouverte publiquement" with lore "%{Guilde.%{_p}%.creating.Ouverte}%" to run function Guilde({_p}, "ouverte")
 		
 		format gui slot 8 of {_p} with green wool block named "§6Confirmer" to run function Guilde({_p}, "finish")
 		format gui slot 7 of {_p} with red wool block named "§6Supprimer" to run function Guilde({_p}, "remove")
@@ -50,13 +48,12 @@ function Guilde(p: player, t: text):
 		add {Guilde.%{_p}%.creating.Name} to {Guildes::*}
 		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.Aliase} to {Guilde.%{_p}%.creating.Aliase}
 		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.Description} to {Guilde.%{_p}%.creating.Description}
-		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.Ouverte} to {Guilde.%{_p}%.creating.Ouverte}
 		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.Owner} to {_p}
 		set {Guilde.%{_p}%} to {Guilde.%{_p}%.creating.Name}
 		clear {Guilde.%{_p}%.creating.Aliase}, {Guilde.%{_p}%.creating.Description}, {Guilde.%{_p}%.creating.Ouverte} and {Guilde.%{_p}%.creating.Name}
 		send "&8[&9Guildes&8] &2Création de votre Guilde..." to {_p}
 		wait 5 seconds
-		send "&8[&9Guildes&8]&2Création &8[&a&l✔&8] &2&l!" to {_p}
+		send "&8[&9Guildes&8] &2Création &8[&a&l✔&8] &2&l!" to {_p}
 		make {_p} execute command "/guilde"
 
 
