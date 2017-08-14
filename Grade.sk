@@ -1,0 +1,51 @@
+command /grade <offline player> <text>:
+	trigger:
+		if player is op:
+			if arg 1 is set:
+				send "&e%arg 1% &7a ete mis dans le groupe &c%arg 2%"
+				if arg 2 is "joueur" or "default":
+					set {grade.%arg-1's uuid%} to "&7[&aJoueur&7]"
+					set arg-1 tab name to "&7[&aJoueur&7] &7%arg-1%"
+				if arg 2 is "moderateur" or "modo":
+					set {grade.%arg-1's uuid%} to "&7[&5Modérateur&7]" 
+					set arg-1 tab name to "&7[&5Modérateur&7] &5%arg-1%" 
+				if arg 2 is "administrateur" or "admin":
+					set {grade.%arg-1's uuid%} to "&7[&cAdmin&7]"
+					set arg-1 tab name to "&7[&cAdmin&7] &c%arg-1%"
+				if arg 2 is "fondateur" or "fonda":
+					set {grade.%arg-1's uuid%} to "&7[&4Fondateur&7]"
+					set arg-1 tab name to "&7[&4Fondateur&7] &4%arg-1%"
+				if arg 2 is "builder" or "architecte":
+					set {grade.%arg-1's uuid%} to "&7[&2Builder&7]"
+					set arg-1 tab name to "&7[&2Builder&7] &2%arg-1%"
+		else:
+			send "&cTu n'as pas la permission d'utiliser cette commande !" to player
+
+on join: 
+	if {grade.%player's uuid%} is "&7[&aJoueur&7]":
+		set player tab name to "&7[&aJoueur&7] &7%player%"
+	if {grade.%player's uuid%} is "&7[&5Modérateur&7]":
+		set player tab name to "&7[&5Modérateur&7] &5%player%"
+	if {grade.%player's uuid%} is "&7[&cAdmin&7]":
+		set player tab name to "&7[&cAdmin&7] &c%player%"
+	if {grade.%player's uuid%} is "&7[&4Fondateur&7]":
+		set player tab name to "&7[&4Fondateur&7] &4%player%"
+	if {grade.%player's uuid%} is "&7[&2Builder&7]":
+		set player tab name to "&7[&2Builder&7] &2%player%"
+	
+on chat:
+	if {grade.%player's uuid%} is "&7[&aJoueur&7]":
+		cancel event
+		broadcast "&7[&aJoueur&7] &7%player%&8: &f%message%"
+	if {grade.%player's uuid%} is "&7[&5Modérateur&7]":
+		cancel event
+		broadcast "&7[&5Modérateur&7] &7%player%&8: &f%message%"
+	if {grade.%player's uuid%} is "&7[&cAdmin&7]":
+		cancel event
+		broadcast "&7[&cAdmin&7] &7%player%&8: &f%message%"
+	if {grade.%player's uuid%} is "&7[&4Fondateur&7]":
+		cancel event
+		broadcast "&7[&4Fondateur&7] &7%player%&8: &f%message%"
+	if {grade.%player's uuid%} is "&7[&2Builder&7]":
+		cancel event
+		broadcast "&7[&2Builder&7] &7%player%&8: &f%message%"
