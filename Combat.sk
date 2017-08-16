@@ -1,0 +1,21 @@
+on damage:
+	
+	if victim is a player: 
+		
+		if attacker is a zombie:
+			if {combatlog::players::%victim%::in.combat} is true:
+				set {combatlog::players::%victim%::in.seconds.until.out} to 10
+				stop
+			send "<grey>[AntiCombatLog] <light red>Vous êtes en combat !" to victim
+			play audio URL "http://164.132.105.223/musiques/BattleTheme.mp3" to victim ID "%victim%.combatsound"
+			set {combatlog::players::%victim%::in.combat} to true
+			set {combatlog::players::%victim%::in.seconds.until.out} to 10
+			while {combatlog::players::%victim%::in.seconds.until.out} is more than 1:
+				{combatlog::players::%victim%::in.seconds.until.out} is not set:
+					stop
+				subtract 1 from {combatlog::players::%victim%::in.seconds.until.out}
+				wait 1 second
+			delete {combatlog::players::%victim%::in.combat}
+			delete {combatlog::players::%victim%::in.seconds.until.out}
+			send "<grey>[Anti-DécoCombat] <light green>Vous n'êtes plus en combat!" to victim
+			stop all sounds for victim

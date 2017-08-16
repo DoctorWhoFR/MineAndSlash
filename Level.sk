@@ -14,6 +14,8 @@ function Level(p: player, s: text, i: number):
 		if {_xp} <= {GestionCompte.xp.%{_p}%}:
 			send "Vous venez de level UP !" to {_p}
 			add 1 to {GestionCompte.level.%{_p}%}
+			set {GestionCompte.xp.%{_p}%} to 0
+			play audio URL "http://164.132.105.223/musiques/LevelUp.mp3" to {_p} ID "%{_p}%.levelup"
 
 on death:
 	if attacker is a player:
@@ -25,4 +27,5 @@ on death:
 
 command /leveltesting:
 	trigger:
-		send "%{GestionCompte.level.%player%}% | %{GestionCompte.xp.%player%}%"
+		set {_xp} to {GestionCompte.level.%player%} * 1000
+		send "%{GestionCompte.level.%player%}% | %{GestionCompte.xp.%player%}% / %{_xp}%"
