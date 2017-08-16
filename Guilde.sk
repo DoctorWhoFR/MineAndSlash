@@ -40,14 +40,14 @@ command /guilde [<text>] [<player>]:
 				if {Guilde.%player%} is set:
 					if {Guilde.%{Guilde.%player%}%.Owner} is player:
 						if arg 2 is set:
-								set {Guilde.invite.%arg 2%} to {Guilde.%player%}
-								send "§8[§9Guildes§8] §6§lVous avez envoyé une invitation pour rejoindre votre guilde à §5%arg 2%" to executor
-								wait 3 ticks
-								send "§8[§9Guildes§8] §6§lAttendez que le joueur l'accepte ou non"
-								send "§8[§9Guildes§8] §6§lVous venez de recevoir une invitation par §8<§5§8> §6§lpour rejoindre sa Guilde" to {_invitep}
-								send "§8[§9Guildes§8] §6§lFaites §3§l/guilde accept §6§l pour rejoindre sa guilde" to {_invitep}
-							else:
-								send "§8[§9Guildes§8] §cLe joueur n'est pas connecté !"
+							set {Guilde.invite.%arg 2%} to {Guilde.%player%}
+							send "§8[§9Guildes§8] §6§lVous avez envoyé une invitation pour rejoindre votre guilde à §5%arg 2%" to executor
+							wait 3 ticks
+							send "§8[§9Guildes§8] §6§lAttendez que le joueur l'accepte ou non"
+							send "§8[§9Guildes§8] §6§lVous venez de recevoir une invitation par §8<§5§8> §6§lpour rejoindre sa Guilde" to {_invitep}
+							send "§8[§9Guildes§8] §6§lFaites §3§l/guilde accept §6§l pour rejoindre sa guilde" to {_invitep}
+						else:
+							send "§8[§9Guildes§8] §cLe joueur n'est pas connecté !"
 					else:
 						send "Vous n'avez pas la permissions d'inviter un membre! " to player
 				else:
