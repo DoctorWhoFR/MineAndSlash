@@ -1,4 +1,5 @@
-﻿command /adminguilde [<text>] [<text>]:
+﻿#Note: Je n'ai pas pu finir l'invite jsuis trop fatigué, je le ferais demain
+command /adminguilde [<text>] [<text>]:
 	permission: adminguilde.admin
 	trigger:
 		if arg 1 is "disband":
@@ -8,8 +9,7 @@
 			clear {Guilde.%arg 2%.Aliase}, {Guilde.%arg 2%.Description}, {Guilde.%arg 2%.Owner} and {Guilde.%arg 2%.membres::*}
 			send "§8[§9Guildes§8] §6§lVous venez de supprimer la guilde: %arg 2%" to player
 
-
-command /guilde [<text>] [<text>]:
+command /guilde [<text>] [<text = player>]:
 	trigger:
 		if arg 1 is not set:
 			if {Guilde.%player%} is not set:
@@ -22,15 +22,33 @@ command /guilde [<text>] [<text>]:
 				send "§8[§9Guildes§8] §6§lMembres:" to player
 				loop {Guilde.%{Guilde.%player%}%.membres::*}:
 					send "§8◘ §9%loop-value%" to player
-
 		else:
 			if arg 1 is "create":
 				if {Guilde.%player%} is not set:
 					Guilde(player, "create")
 				else:
 					send "§8[§9Guildes§8]§c§lVous devez d'abbord supprimer ou quiter votre Guilde!" to player
-			
-
+			if arg 1 is "accept":
+				if arg 2 is set:
+					if {Guilde.invite.%arg 2%.%player%} is true:
+						set {_acceptp} to arg 2 parsed as player
+						if {_acceptp} is online:
+							add player to {Guilde.%arg 2%}
+							delete {Guilde.invite.%arg 2%.%player%} 
+					else: 
+						send "§8[§9Guildes§8] §6§lVous n'avez pas reçu d'invitation pour rejoindre la guilde du joueur %{_acceptp}%"
+			if arg 1 is "invite":
+				if arg 2 is set:
+					set {_invitep} to arg 2 parsed as player
+					if {_invitep} is online:
+						set {Guilde.invite.%player%.%arg 2%} to true
+						send "§8[§9Guildes§8] §6§lVous avez envoyé une invitation pour rejoindre votre guilde à §5%arg 2%" to executor
+						wait 3 ticks
+						send "§8[§9Guildes§8] §6§lAttendez que le joueur l'accepte ou non"
+						send "§8[§9Guildes§8] §6§lVous venez de recevoir une invitation par §8<§5§8> §6§lpour rejoindre sa Guilde" to {_invitep}
+						send "§8[§9Guildes§8] §6§lFaites §3§l/guilde accept §6§l pour rejoindre sa guilde" to {_invitep}
+					else:
+						send "§8[§9Guildes§8] §cLe joueur n'est pas connecté !"
 function Guilde(p: player, t: text):
 	if {_t} is "create":
 		if {Guilde.%{_p}%.creating.Name} is not set:
