@@ -7,7 +7,8 @@ command /adminguilde [<text>] [<text>]:
 			loop {Guilde.%arg 2%.membres::*}:
 				clear {Guilde.%loop-value%}
 			clear {Guilde.%arg 2%.Aliase}, {Guilde.%arg 2%.Description}, {Guilde.%arg 2%.Owner} and {Guilde.%arg 2%.membres::*}
-			send "§8[§9Guildes§8] §6§lVous venez de supprimer la guilde: %arg 2%" to player
+			send "§8[§9Guildes§8] §6§lVous venez de supprimer la guilde: &5%arg 2%" to player
+			broadcast "§8[§9Guildes§8] &6&lLa Guilde: &5%arg 2% &6&lvient d'être Disband par l'équipe d'Administration."
 
 command /guilde [<text>] [<player>]:
 	trigger:
@@ -91,7 +92,8 @@ function Guilde(p: player, t: text):
 		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.Description} to {Guilde.%{_p}%.creating.Description}
 		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.Owner} to {_p}
 		set {Guilde.%{_p}%} to {Guilde.%{_p}%.creating.Name}
-		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.membres::*} to "%{_p}%"
+		set {Guilde.%{Guilde.%{_p}%.creating.Name}%.membres::*} to "%{_p}%"		
+		broadcast "§8[§9Guildes§8] &5&lLa Guilde: &a%{Guilde.%{_p}%.creating.Name}% &5&l vient d'être créé par &a%{_p}%"
 		clear {Guilde.%{_p}%.creating.Aliase}, {Guilde.%{_p}%.creating.Description}, {Guilde.%{_p}%.creating.Ouverte} and {Guilde.%{_p}%.creating.Name}
 		send "§8[§9Guildes§8] §2Création de votre Guilde..." to {_p}
 		wait 5 seconds
