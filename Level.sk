@@ -1,20 +1,23 @@
 on join:
-	if {GestionCompte.level.%player%} is not set:
-		set {GestionCompte.level.%player%} to 1
-		set {GestionCompte.xp.%player%} to 0
+	if {level.%player%} is not set:
+		set {level.%player%} to 1
+		set {xp.%player%} to 0
+		set {xpmax.%player%} to {level.%player%} * 1000
 
 function Level(p: player, s: text, i: number):
 	
 	if {_s} is "xpadd":
-		add {_i} to {GestionCompte.xp.%{_p}%}
+		add {_i} to {xp.%{_p}%}
+		set {xp.%{_p}%} to {xp.%{_p}%} 
 		send "Hey! +%{_i}%" to {_p}
 
 	if {_s} is "levelcheck":
-		set {_xp} to {GestionCompte.level.%{_p}%} * 1000
-		if {_xp} <= {GestionCompte.xp.%{_p}%}:
+		set {_xp} to {level.%{_p}%} * 1000
+		if {_xp} <= {xp.%{_p}%}:
 			send "Vous venez de level UP !" to {_p}
-			add 1 to {GestionCompte.level.%{_p}%}
-			set {GestionCompte.xp.%{_p}%} to 0
+			add 1 to {level.%{_p}%}
+			set {xp.%{_p}%} to 0
+			set {xpmax.%{_p}%} to {level.%{_p}%} * 1000
 			play audio URL "http://164.132.105.223/musiques/LevelUp.mp3" to {_p} ID "%{_p}%.levelup"
 
 on death:
@@ -24,8 +27,3 @@ on death:
 			Level(attacker, "xpadd", 200)
 
 		Level(attacker, "levelcheck", 0)
-
-command /leveltesting:
-	trigger:
-		set {_xp} to {GestionCompte.level.%player%} * 1000
-		send "%{GestionCompte.level.%player%}% | %{GestionCompte.xp.%player%}% / %{_xp}%"
