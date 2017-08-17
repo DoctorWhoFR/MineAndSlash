@@ -2,7 +2,7 @@
 
 Guilde.sk --> DoctorWhoFR
 Menu.sk --> Alex
-Level.sk --> Skymog
+Level.sk --> Skymogs
 
 # Références:
 
