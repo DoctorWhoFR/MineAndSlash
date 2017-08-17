@@ -2,17 +2,14 @@ on rightclick on crafting table:
 	cancel event
 	open virtual chest inventory with size 5 named "Craft" to player
 	format gui slot 0 of player with player's skull named "&2%player%" to do nothing
-	format gui slot 2 of player with blaze rod named "&6Craft d'une épée magique :O" with lore "&aItems que vous aurais besoin: ||&b1 &aEmeraude ||&b1 &aEpée en fer ||&7Clique droit pour crafter" to run player command "/§crft epeemagique"
-command /§crft <text>:
-	trigger:
-		if arg 1 is "epeemagique":
-			if player has 1 emerald:
-				if player has 1 iron sword:
-					give 1 blaze rod named "&e&lEPEE MAGIQUE" to player
-					send "&8[&5Craft&8] &3Vous venez de craft une épée magique OMG sa tourne mal explication"
-					remove 1 emerald from player's inventory
-					remove 1 iron sword from player's inventory
-			else:
-				else:
-					send "Vous n'avez pas asser d'épée en fer !"
-				send "&cVous n'avez pas asser d'émeraude !"						
+	format gui slot 2 of player with blaze rod named "&6Craft d'une épée magique :O" with lore "&aItems que vous aurais besoin: ||&b1 &aEmeraude ||&b1 &aEpée en fer ||&7Clique droit pour crafter" to run function Craft(player, "epeemagique")
+
+function Craft(p: player, s: text):
+	if {_s} is "epeemagique":
+  	if {_p} has 1 emerald and 1 iron sword:
+      give 1 blaze rod named "&e&lEPEE MAGIQUE" to {_p}
+      send "&8[&5Craft&8] &3Vous venez de craft une épée magique OMG sa tourne mal explication" to {_p}
+      remove 1 emerald from {_p}'s inventory
+      remove 1 iron sword from {_p}'s inventory
+    else:
+    	send "Vous n'avez pas les ressources requises!" to {_p}
