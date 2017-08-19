@@ -1,11 +1,6 @@
-# MineAndSlash
+◘ Créé chaque items & stuff pour chaque étage
+◘ Créé chaque mobs & loot etc... pour chaque étage
+◘ Configurer tout les plugins
+◘ Faire les quêtes
+◘ Configurer les sons
 
-Guilde.sk --> DoctorWhoFR
-Menu.sk --> Alex
-Level.sk --> Skymogs
-
-# Références:
-
-Delete / del = Suppression d'un ou plusieurs fichiers
-Create = Création d'un ou plusieurs fichiers
-Edit = Edition de fichier
